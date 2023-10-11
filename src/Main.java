@@ -1,6 +1,3 @@
-import jdk.internal.classfile.BufWriter;
-import jdk.internal.icu.text.UnicodeSet;
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -8,100 +5,80 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    ArrayList<Livro>novoLivro = new ArrayList<>();
-    private static String Livro;
-
     public static void main(String[] args) {
-        ArrayListist<Livro> dataLancamento = new ArrayListist<>();
+        ArrayList<Livro> listaLivros = new ArrayList<>();
 
+        System.out.print("Bem vindo ao sistema de Sebo!");
 
-        System.out.println("Bem vindo ao sistema do SEBO Senai");
+        Livro novoLivro = new Livro();
+        Autor novoAutor = new Autor();
 
-        Scanner leitor = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
+        int opcao;
 
-        String opcao;
+        do{
+            System.out.println("Escolha uma opção: \n 1 - Cadastrar livro \n 2 - Listar livros \n 0 - Sair");
+            opcao = scanner.nextInt();
 
+            switch (opcao){
+                case 1:
 
-        System.out.println("Escolha uma opção 1 -Livro   / 2 - autor / 0 - Sair");
-        opcao = leitor.nextLine();
+                    System.out.print("Digite o nome do livro que deseja cadastrar: ");
+                    novoLivro.titulo = scanner.next();
 
-        switch (opcao) {
-            case "1":
+                    System.out.print("Digite o autor do livro que deseja cadastrar: ");
+                    novoAutor.nome = scanner.next();
 
-                String opcaoLivro;
-                do {
-                    System.out.println("Digite uma opção: 1 - Cadastrar livro / 2 - Listar livro / 0 - Voltar");
-                    opcaoLivro = leitor.nextLine();
+                    System.out.print("Digite o local de nascimento do autor: ");
+                    novoAutor.localNasc = scanner.next();
 
-                    switch (opcaoLivro) {
+                    System.out.print("Digite o preço do livro: ");
+                    novoLivro.preco = scanner.nextFloat();
 
-                        case "1":
+                    System.out.print("Digite a data de lançamento do livro: ");
+                    LocalDate date = LocalDate.parse(scanner.next(), DateTimeFormatter.ofPattern("dd/MM/yyy"));
+                    Period periodo = Period.between(date, LocalDate.now());
 
-                            Livro novoLivro = new Livro();
-                            System.out.println("Digite o titulo: ");
-                            novoLivro.titulo = leitor.nextLine();
+                    novoLivro.dataLancamento = date;
 
-                            System.out.println("Digite o Autor: ");
-                            novoLivro.autor = leitor.nextLine();
-
-                            System.out.println("Digite o Preco: ");
-                            novoLivro.preco = Float.valueOf(leitor.nextLine());
-
-
-                            System.out.println("Digite a data de lancamento: (dd/mm/aaaa)");
-                            novoLivro.dataLancamento = LocalDate.parse(leitor.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy")); //convertendo tipo data / DateTimeFormatter.ofPattern("") > definindo padrao da data
-
-
-                            Period Livro = Period.between(novoLivro.dataLancamento, LocalDate.now());
-
-
-                            if (Livro.getYears() >= 5) {
-                                System.out.println("data Válida e dentroo!");
-                            } else {
-                                System.out.println("data Inválida");
-                                break;
-                            }
-
-
-
-                            System.out.println("Livro cadastrado com sucesso! :)");
-
-                            break;
-                        case "2":
-
-
-                            if (Livro.size() > 0) {
-                                for (Livro cadaLivro : novoLivro.getYears()) {
-                                    System.out.println("Titulo " + cadaLivro.titulo);
-                                    System.out.println("Autor " + cadaLivro.autor);
-                                    System.out.println("Data de lancamento " + cadaLivro.dataLancamento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-                                    System.out.println("Preco " + cadaLivro.preco);
-                                    System.out.println();
-                                    System.out.println("Aperte ENTER para continuar");
-                                    leitor.nextLine();
-                                }
-                            }else  {
-                                System.out.println("A lista vazia");
-                            }
-                            break;
-
-
-                        case "0":
-                            System.out.println("volta");
-                            break;
-                        default:
-
-                            break;
+                    if(periodo.getYears() > 5){
+                        System.out.println("O livro tem mais de cinco anos de lançamento.");
+                    } else{
+                        System.out.println("O livro tem menos de cinco anos de lançamento. \nVoltando ao menu anterior");
+                        break;
                     }
-                } while (!opcaoLivro.equals("0"));
 
-                break;
+                    listaLivros.add(novoLivro);
 
+                    System.out.println("Livro cadastrado com sucesso!");
+                    break;
 
-        }
-    }
+                case 2:
+                    if (listaLivros.isEmpty()) {
+                        System.out.println("Lista vazia.\n Voltando ao menu anterior.");
+                    } else {
+                        for(Livro cadaLivro : listaLivros){
+                            System.out.println();
+                            System.out.println("Título do livro: " + cadaLivro.titulo);
+                            System.out.println("Autor: " + novoAutor.nome);
+                            System.out.println("Preço: R$" + cadaLivro.preco);
+                            System.out.println("Data de lançamento: " + cadaLivro.dataLancamento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                            System.out.println();
+                        }
+                    }
 
-    private static class ArrayListist<T> {
+                    System.out.print("Fim da lista.");
+                    break;
+
+                case 0:
+                    System.out.print("Obrigado por usar o nosso sistema de Sebo!");
+                    break;
+
+                default:
+                    System.out.print("A opção " + opcao + " não é válida! \n Digite uma opção válida.");
+                    break;
+            }
+        } while (opcao != 0);
     }
 }
