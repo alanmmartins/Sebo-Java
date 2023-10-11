@@ -4,6 +4,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//- Exercício:
+//        Você deve montar um sistema de cadastro e listagem de livros para um sebo que só aceita livros com mais de 5  anos de lançamento.
+//        Seu PO fez uma reunião com o dono do sebo e fez uma modelagem para que você possa se basear e criar o  sistema.
 public class Main {
     public static void main(String[] args) {
         ArrayList<Livro> listaLivros = new ArrayList<>();
@@ -24,19 +27,19 @@ public class Main {
             switch (opcao){
                 case 1:
 
-                    System.out.print("Digite o nome do livro que deseja cadastrar: ");
+                    System.out.print("Digite o nome do livro que deseja cadastrar \n R : ");
                     novoLivro.titulo = scanner.next();
 
-                    System.out.print("Digite o autor do livro que deseja cadastrar: ");
+                    System.out.print("Digite o autor do livro que deseja cadastrar \n R :  ");
                     novoAutor.nome = scanner.next();
 
-                    System.out.print("Digite o local de nascimento do autor: ");
+                    System.out.print("Digite o local de nascimento do autor \n R :  ");
                     novoAutor.localNasc = scanner.next();
 
-                    System.out.print("Digite o preço do livro: ");
+                    System.out.print("Digite o preço do livro \n R :  ");
                     novoLivro.preco = scanner.nextFloat();
 
-                    System.out.print("Digite a data de lançamento do livro: ");
+                    System.out.print("Digite a data de lançamento do livro \n R :  ");
                     LocalDate date = LocalDate.parse(scanner.next(), DateTimeFormatter.ofPattern("dd/MM/yyy"));
                     Period periodo = Period.between(date, LocalDate.now());
 
@@ -45,7 +48,7 @@ public class Main {
                     if(periodo.getYears() > 5){
                         System.out.println("O livro tem mais de cinco anos de lançamento.");
                     } else{
-                        System.out.println("O livro tem menos de cinco anos de lançamento. \nVoltando ao menu anterior");
+                        System.out.println("O livro tem menos de cinco anos de lançamento. \n Voltando ao menu anterior");
                         break;
                     }
 
@@ -68,11 +71,11 @@ public class Main {
                         }
                     }
 
-                    System.out.print("Fim da lista.");
+                    System.out.print("Fim da Lista.");
                     break;
 
                 case 0:
-                    System.out.print("Obrigado por usar o nosso sistema de Sebo!");
+                    System.out.print("Obrigado volte sempre !");
                     break;
 
                 default:
