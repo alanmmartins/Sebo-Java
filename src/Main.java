@@ -9,12 +9,14 @@ import java.util.Scanner;
 //        Seu PO fez uma reunião com o dono do sebo e fez uma modelagem para que você possa se basear e criar o  sistema.
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Livro> listaLivros = new ArrayList<>();
+       /* ArrayList<Livro> listaLivros = new ArrayList<>();*/
 
         System.out.print("Bem vindo ao sistema de Sebo!");
 
         Livro novoLivro = new Livro();
         Autor novoAutor = new Autor();
+
+        Livro metodoLivro = new Livro();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -52,21 +54,22 @@ public class Main {
                         break;
                     }
 
-                    listaLivros.add(novoLivro);
+                    metodoLivro.CadastrarLivro(novoLivro);
+                    /*listaLivros.add(novoLivro);*/
 
-                    System.out.println("Livro cadastrado com sucesso!");
+                  /*  System.out.println("Livro cadastrado com sucesso!");*/
                     break;
 
                 case 2:
-                    if (listaLivros.isEmpty()) {
+                    if (metodoLivro.listaLivros.isEmpty()) {
                         System.out.println("Lista vazia.\n Voltando ao menu anterior.");
                     } else {
-                        for(Livro cadaLivro : listaLivros){
+                        for(Livro cadaLivro : metodoLivro.listaLivros){
                             System.out.println();
                             System.out.println("Título do livro: " + cadaLivro.titulo);
-                            System.out.println("Autor: " + novoAutor.nome);
-                            System.out.println("Preço: R$" + cadaLivro.preco);
-                            System.out.println("Data de lançamento: " + cadaLivro.dataLancamento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                            System.out.println("Autor do livro: " + novoAutor.nome);
+                            System.out.println("Preço do livro: R$" + cadaLivro.preco);
+                            System.out.println("Data de lançamento do livro: " + cadaLivro.dataLancamento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                             System.out.println();
                         }
                     }
